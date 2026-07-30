@@ -1,149 +1,132 @@
 <!doctype html>
+
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Panel restringido para consultar las evaluaciones de participación ciudadana.">
-  <title>Administración de evaluaciones | San Pedro Participa</title>
-  <link rel="stylesheet" href="assets/css/estilos.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<meta content="Panel restringido para consultar las evaluaciones de participación ciudadana." name="description"/>
+<title>Administración de evaluaciones | San Pedro Participa</title>
+<link href="assets/css/estilos.css" rel="stylesheet"/>
 </head>
 <body class="admin-page">
-  <a class="skip" href="#contenido">Saltar al contenido principal</a>
-  <header class="site-header compact-header">
-    <div class="nav-wrap">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">SP</span><span>San Pedro Participa</span></a>
-      <nav class="nav-links" aria-label="Navegación administrativa">
-        <a href="index.html">Volver al portal</a>
-        <a href="caja-5-evaluacion.html">Formulario público</a>
-      </nav>
-    </div>
-    <section class="hero admin-hero">
-      <div>
-        <span class="eyebrow">Área restringida</span>
-        <h1>Administración de evaluaciones</h1>
-        <p>Consulta y exportación de respuestas almacenadas en Firebase Firestore.</p>
-      </div>
-    </section>
-  </header>
+<a class="skip" href="#contenido">Saltar al contenido principal</a>
+<header class="site-header compact-header">
+<div class="nav-wrap">
+<a class="brand" href="index.html"><span aria-hidden="true" class="brand-mark">SP</span><span>San Pedro Participa</span></a>
+<nav aria-label="Navegación administrativa" class="nav-links">
+<a href="index.html">Volver al portal</a>
+<a href="caja-5-evaluacion.html">Formulario público</a>
+</nav>
+</div>
+<section class="hero admin-hero">
+<div>
+<span class="eyebrow">Área restringida</span>
+<h1>Administración de evaluaciones</h1>
+<p>Consulta, análisis y exportación de las evaluaciones ciudadanas recibidas.</p>
+</div>
+</section>
+</header>
+<main class="container admin-container" id="contenido">
+<section aria-labelledby="titulo-login" class="auth-card" id="login-view">
+<div aria-hidden="true" class="icon">🔐</div>
+<h2 id="titulo-login">Acceso institucional</h2>
+<p>Inicie sesión con la cuenta de Google autorizada para consultar las evaluaciones.</p>
+<div class="login-form" id="admin-login-form"><button aria-label="Ingresar con Google" class="btn google-btn" id="google-login" type="button"><svg aria-hidden="true" height="20" viewBox="0 0 24 24" width="20"><path d="M21.6 12.23c0-.71-.06-1.23-.2-1.77H12v3.42h5.52c-.11.85-.71 2.13-2.04 2.99l-.02.11 2.96 2.29.21.02c1.94-1.79 3.06-4.43 3.06-7.06Z" fill="#4285F4"></path><path d="M12 22c2.77 0 5.09-.91 6.79-2.49l-3.23-2.5c-.86.58-2.02.99-3.56.99-2.66 0-4.92-1.8-5.73-4.28l-.1.01-3.08 2.39-.04.1A10 10 0 0 0 12 22Z" fill="#34A853"></path><path d="M6.27 13.72A6.02 6.02 0 0 1 5.94 12c0-.6.11-1.18.32-1.72l-.01-.12-3.12-2.43-.1.05A10 10 0 0 0 2 12c0 1.52.34 2.96.95 4.22l3.32-2.5Z" fill="#FBBC05"></path><path d="M12 6c1.93 0 3.23.83 3.98 1.52l2.88-2.81C17.08 3.06 14.77 2 12 2a10 10 0 0 0-8.95 5.78l3.22 2.5C7.08 7.8 9.34 6 12 6Z" fill="#EA4335"></path></svg><span id="google-button-text">Ingresar con Google</span></button><div class="form-status" hidden="" id="login-status" role="alert"></div></div>
 
-  <main id="contenido" class="container admin-container">
-    <section id="login-view" class="auth-card" aria-labelledby="titulo-login">
-      <div class="icon" aria-hidden="true">🔐</div>
-      <h2 id="titulo-login">Ingreso de superadministrador</h2>
-      <p>Use la cuenta existente en Firebase Authentication. Las reglas de Firestore permiten consultar la colección únicamente cuando el rol es <strong>super_admin</strong>.</p>
-      <form id="admin-login-form" class="login-form">
-        <div class="field">
-          <label for="admin-email">Correo electrónico</label>
-          <input id="admin-email" name="email" type="email" autocomplete="username" required>
-        </div>
-        <div class="field">
-          <label for="admin-password">Contraseña</label>
-          <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
-        </div>
-        <button class="btn" type="submit">Ingresar</button>
-        <div id="login-status" class="form-status" role="alert" hidden></div>
-      </form>
-      <div class="notice">Antes de publicar, habilite el proveedor <strong>Correo electrónico/Contraseña</strong> y agregue el dominio de GitHub Pages en los dominios autorizados de Firebase Authentication.</div>
-    </section>
-
-    <section id="dashboard-view" hidden>
-      <div class="admin-toolbar">
-        <div>
-          <span class="tag">Sesión autorizada</span>
-          <h2>Evaluaciones recibidas</h2>
-          <p>Cuenta: <strong id="admin-user"></strong></p>
-        </div>
-        <div class="toolbar-actions">
-          <button id="actualizar-datos" class="btn secondary" type="button">Actualizar</button>
-          <button id="exportar-csv" class="btn" type="button" disabled>Exportar CSV</button>
-          <button id="cerrar-sesion" class="btn danger" type="button">Cerrar sesión</button>
-        </div>
-      </div>
-
-      <section class="kpi-row admin-kpis" aria-label="Indicadores generales">
-        <article class="kpi"><strong id="kpi-total">0</strong><span>Evaluaciones</span></article>
-        <article class="kpi"><strong id="kpi-promedio">—</strong><span>Satisfacción promedio / 5</span></article>
-        <article class="kpi"><strong id="kpi-recomendacion">—</strong><span>Recomendaría participar</span></article>
-        <article class="kpi"><strong id="kpi-ultima">—</strong><span>Último registro</span></article>
-      </section>
-
-      <section class="panel admin-filters" aria-labelledby="titulo-filtros">
-        <h3 id="titulo-filtros">Filtros</h3>
-        <div class="form-grid filters-grid">
-          <div class="field">
-            <label for="filtro-texto">Buscar</label>
-            <input id="filtro-texto" placeholder="Código, actividad o territorio">
-          </div>
-          <div class="field">
-            <label for="filtro-mecanismo">Mecanismo</label>
-            <select id="filtro-mecanismo">
-              <option value="">Todos</option>
-              <option>Rendición de cuentas</option>
-              <option>Audiencia pública</option>
-              <option>Mesa de participación</option>
-              <option>Encuesta o consulta</option>
-              <option>Taller o encuentro</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="filtro-fecha">Fecha de actividad</label>
-            <input id="filtro-fecha" type="date">
-          </div>
-          <div class="field filter-button-field">
-            <button id="limpiar-filtros" class="btn secondary" type="button">Limpiar filtros</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="table-card" aria-labelledby="titulo-tabla">
-        <div class="table-heading">
-          <div>
-            <h3 id="titulo-tabla">Registros</h3>
-            <p>Se cargan hasta 1.000 evaluaciones, ordenadas de la más reciente a la más antigua.</p>
-          </div>
-        </div>
-        <p id="cargando-datos" class="loading-message">Consultando Firebase…</p>
-        <p id="sin-resultados" class="empty-message" hidden>No hay evaluaciones que coincidan con los filtros.</p>
-        <div class="table-scroll">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Actividad</th>
-                <th>Mecanismo</th>
-                <th>Fecha</th>
-                <th>Satisfacción</th>
-                <th>Recomienda</th>
-                <th>Registro</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody id="tabla-evaluaciones-body"></tbody>
-          </table>
-        </div>
-      </section>
-    </section>
-  </main>
-
-  <dialog id="detalle-dialog" class="detail-dialog">
-    <div class="dialog-header">
-      <div>
-        <span class="tag">Detalle de evaluación</span>
-        <h2>Respuesta ciudadana</h2>
-      </div>
-      <button id="cerrar-detalle" class="dialog-close" type="button" aria-label="Cerrar detalle">×</button>
-    </div>
-    <div id="detalle-contenido" class="detail-grid"></div>
-  </dialog>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div><strong>Área administrativa</strong><p class="foot-note">El panel no modifica ni elimina respuestas; únicamente consulta y exporta los registros autorizados por Firestore.</p></div>
-      <div><p><a href="caja-5-evaluacion.html">Volver al formulario público</a></p></div>
-    </div>
-  </footer>
-  <script type="module" src="assets/js/admin.js"></script>
+</section>
+<section hidden="" id="dashboard-view">
+<div class="admin-toolbar">
+<div>
+<span class="tag">Sesión autorizada</span>
+<h2>Evaluaciones recibidas</h2>
+<p>Cuenta: <strong id="admin-user"></strong></p>
+</div>
+<div class="toolbar-actions">
+<button class="btn secondary" id="actualizar-datos" type="button">Actualizar</button>
+<button class="btn" disabled="" id="exportar-csv" type="button">Exportar CSV</button>
+<button class="btn danger" id="cerrar-sesion" type="button">Cerrar sesión</button>
+</div>
+</div>
+<section aria-label="Indicadores generales" class="kpi-row admin-kpis">
+<article class="kpi"><strong id="kpi-total">0</strong><span>Evaluaciones</span></article>
+<article class="kpi"><strong id="kpi-promedio">—</strong><span>Satisfacción promedio / 5</span></article>
+<article class="kpi"><strong id="kpi-recomendacion">—</strong><span>Recomendaría participar</span></article>
+<article class="kpi"><strong id="kpi-ultima">—</strong><span>Último registro</span></article>
+</section>
+<section aria-labelledby="titulo-filtros" class="panel admin-filters">
+<h3 id="titulo-filtros">Filtros</h3>
+<div class="form-grid filters-grid">
+<div class="field">
+<label for="filtro-texto">Buscar</label>
+<input id="filtro-texto" placeholder="Código, actividad o territorio"/>
+</div>
+<div class="field">
+<label for="filtro-mecanismo">Mecanismo</label>
+<select id="filtro-mecanismo">
+<option value="">Todos</option>
+<option>Rendición de cuentas</option>
+<option>Audiencia pública</option>
+<option>Mesa de participación</option>
+<option>Encuesta o consulta</option>
+<option>Taller o encuentro</option>
+<option>Otro</option>
+</select>
+</div>
+<div class="field">
+<label for="filtro-fecha">Fecha de actividad</label>
+<input id="filtro-fecha" type="date"/>
+</div>
+<div class="field filter-button-field">
+<button class="btn secondary" id="limpiar-filtros" type="button">Limpiar filtros</button>
+</div>
+</div>
+</section>
+<section aria-labelledby="titulo-tabla" class="table-card">
+<div class="table-heading">
+<div>
+<h3 id="titulo-tabla">Registros</h3>
+<p>Se muestran hasta 1.000 evaluaciones, ordenadas de la más reciente a la más antigua.</p>
+</div>
+</div>
+<p class="loading-message" id="cargando-datos">Consultando información…</p>
+<p class="empty-message" hidden="" id="sin-resultados">No hay evaluaciones que coincidan con los filtros.</p>
+<div class="table-scroll">
+<table class="admin-table">
+<thead>
+<tr>
+<th>Código</th>
+<th>Actividad</th>
+<th>Mecanismo</th>
+<th>Fecha</th>
+<th>Satisfacción</th>
+<th>Recomienda</th>
+<th>Registro</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody id="tabla-evaluaciones-body"></tbody>
+</table>
+</div>
+</section>
+</section>
+</main>
+<dialog class="detail-dialog" id="detalle-dialog">
+<div class="dialog-header">
+<div>
+<span class="tag">Detalle de evaluación</span>
+<h2>Respuesta ciudadana</h2>
+</div>
+<button aria-label="Cerrar detalle" class="dialog-close" id="cerrar-detalle" type="button">×</button>
+</div>
+<div class="detail-grid" id="detalle-contenido"></div>
+</dialog>
+<footer class="site-footer">
+<div class="footer-inner">
+<div><strong>Área administrativa</strong><p class="foot-note">Acceso reservado para la consulta y exportación de las evaluaciones ciudadanas.</p></div>
+<div><p><a href="caja-5-evaluacion.html">Volver al formulario público</a></p></div>
+</div>
+</footer>
+<script src="assets/js/admin.js" type="module"></script>
 </body>
 </html>

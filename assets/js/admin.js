@@ -1,7 +1,8 @@
 import { auth, db } from './firebase-config.js';
 import {
   onAuthStateChanged,
-  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   signOut
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 import {
@@ -16,7 +17,8 @@ import {
 
 const loginView = document.querySelector('#login-view');
 const dashboardView = document.querySelector('#dashboard-view');
-const loginForm = document.querySelector('#admin-login-form');
+const googleLoginButton = document.querySelector('#google-login');
+const googleButtonText = document.querySelector('#google-button-text');
 const loginStatus = document.querySelector('#login-status');
 const userLabel = document.querySelector('#admin-user');
 const logoutButton = document.querySelector('#cerrar-sesion');
@@ -93,7 +95,7 @@ function showLogin() {
 function showDashboard(user) {
   loginView.hidden = true;
   dashboardView.hidden = false;
-  userLabel.textContent = user.email || user.uid;
+  userLabel.textContent = user.displayName || user.email || user.uid;
 }
 
 function formatDate(value) {
@@ -231,8 +233,8 @@ async function loadRecords() {
     tableBody.replaceChildren();
     emptyState.hidden = false;
     emptyState.textContent = error.code?.includes('permission-denied')
-      ? 'La cuenta inició sesión, pero las reglas no reconocen el rol super_admin.'
-      : 'No fue posible cargar las evaluaciones.';
+      ? 'La cuenta no tiene permisos para consultar las evaluaciones.'
+      : 'No fue posible cargar las evaluaciones. Intente nuevamente.';
   } finally {
     loadingState.hidden = true;
     refreshButton.disabled = false;
@@ -288,25 +290,29 @@ function exportCsv() {
   }, 1000);
 }
 
-loginForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+googleLoginButton.addEventListener('click', async () => {
   loginStatus.hidden = true;
-  const button = loginForm.querySelector('button[type="submit"]');
-  button.disabled = true;
-  button.textContent = 'Ingresando…';
+  googleLoginButton.disabled = true;
+  googleButtonText.textContent = 'Abriendo Google…';
 
   try {
-    await signInWithEmailAndPassword(
-      auth,
-      loginForm.elements.email.value.trim(),
-      loginForm.elements.password.value
-    );
+    await signInWithPopup(auth, googleProvider);
   } catch (error) {
     console.error('Error de autenticación:', error);
-    setLoginStatus('Correo, contraseña o configuración de Authentication incorrectos.', 'error');
+    const messages = {
+      'auth/popup-closed-by-user': 'El acceso fue cancelado.',
+      'auth/cancelled-popup-request': 'El acceso fue cancelado.',
+      'auth/popup-blocked': 'El navegador bloqueó la ventana de acceso. Permita ventanas emergentes e intente nuevamente.',
+      'auth/unauthorized-domain': 'Este sitio no está autorizado para iniciar sesión.',
+      'auth/network-request-failed': 'No fue posible conectarse. Revise su conexión a internet e intente nuevamente.'
+    };
+    setLoginStatus(messages[error.code] || 'No fue posible iniciar sesión con Google.', 'error');
   } finally {
-    button.disabled = false;
-    button.textContent = 'Ingresar';
+    googleLoginButton.disabled = false;
+    googleButtonText.textContent = 'Ingresar con Google';
   }
 });
 
@@ -337,7 +343,7 @@ onAuthStateChanged(auth, async (user) => {
     if (!(await userIsSuperAdmin(user))) {
       await signOut(auth);
       showLogin();
-      setLoginStatus('Acceso denegado: esta cuenta no tiene rol super_admin activo.', 'error');
+      setLoginStatus('Esta cuenta no tiene permisos para ingresar al panel.', 'error');
       return;
     }
     showDashboard(user);
@@ -346,6 +352,6 @@ onAuthStateChanged(auth, async (user) => {
     console.error('No fue posible validar el rol:', error);
     await signOut(auth);
     showLogin();
-    setLoginStatus('No fue posible validar el rol administrativo.', 'error');
+    setLoginStatus('No fue posible verificar los permisos de esta cuenta.', 'error');
   }
 });

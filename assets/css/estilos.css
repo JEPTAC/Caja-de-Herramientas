@@ -112,3 +112,6 @@ a:focus,button:focus,input:focus,textarea:focus,select:focus{outline:3px solid #
 @media(max-width:1100px){.cards.five-cards{grid-template-columns:repeat(3,1fr)}.filters-grid{grid-template-columns:1fr 1fr}.admin-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.rating-scale{grid-template-columns:1fr}.rating-scale span{min-height:52px;flex-direction:row;gap:8px}.rating-scale small{margin:0}.admin-toolbar{display:block}.toolbar-actions{justify-content:flex-start;margin-top:16px}.filters-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.auth-card{padding:24px}.cards.five-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.cards.five-cards{grid-template-columns:1fr}.admin-kpis{grid-template-columns:1fr}.toolbar-actions .btn{width:100%}}
+.google-btn{width:100%;background:#fff;color:#24324a;border:1px solid #c9d3e2;box-shadow:0 4px 12px rgba(16,42,90,.08);padding:13px 18px}
+.google-btn:hover{background:#f7f9fc;color:#172033;border-color:#aebbd0}
+.google-btn svg{flex:0 0 auto}

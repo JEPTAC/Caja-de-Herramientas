@@ -96,10 +96,10 @@ function buildPayload() {
 function friendlyError(error) {
   const code = error?.code || '';
   if (code.includes('permission-denied')) {
-    return 'Firebase rechazó el registro. Verifique que las reglas nuevas estén publicadas exactamente como se entregan en la carpeta firebase.';
+    return 'No fue posible registrar la evaluación. Intente nuevamente o comuníquese con la Alcaldía.';
   }
   if (code.includes('unavailable')) {
-    return 'No fue posible conectarse con Firebase. Revise la conexión a internet e intente nuevamente.';
+    return 'No fue posible conectarse. Revise la conexión a internet e intente nuevamente.';
   }
   return 'No se pudo guardar la evaluación. Intente nuevamente o comuníquese con la Alcaldía.';
 }
@@ -128,9 +128,9 @@ form?.addEventListener('submit', async (event) => {
     receiptCode.textContent = payload.codigo;
     receiptBox.hidden = false;
     form.reset();
-    setStatus('La evaluación fue guardada correctamente en Firebase.', 'success');
+    setStatus('La evaluación fue registrada correctamente.', 'success');
   } catch (error) {
-    console.error('Error al guardar la evaluación:', error);
+    console.error('Error al registrar la evaluación:', error);
     setStatus(friendlyError(error), 'error');
   } finally {
     submitButton.disabled = false;
