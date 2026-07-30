@@ -115,3 +115,39 @@ a:focus,button:focus,input:focus,textarea:focus,select:focus{outline:3px solid #
 .google-btn{width:100%;background:#fff;color:#24324a;border:1px solid #c9d3e2;box-shadow:0 4px 12px rgba(16,42,90,.08);padding:13px 18px}
 .google-btn:hover{background:#f7f9fc;color:#172033;border-color:#aebbd0}
 .google-btn svg{flex:0 0 auto}
+
+/* Identidad institucional y acceso */
+.brand-mark.logo-mark{
+  width:54px;
+  height:54px;
+  padding:3px;
+  overflow:hidden;
+  background:#fff;
+  border-radius:15px;
+}
+.brand-mark.logo-mark img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:11px;
+}
+.nav-links a.nav-login{
+  background:#fff;
+  color:var(--azul);
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.14);
+}
+.nav-links a.nav-login:hover,
+.nav-links a.nav-login:focus{
+  background:#f3f7ff;
+  color:#001b4e;
+}
+.google-btn{
+  margin-top:22px;
+  min-height:52px;
+}
+@media(max-width:650px){
+  .brand-mark.logo-mark{width:50px;height:50px}
+  .nav-links a.nav-login{width:100%;text-align:center;margin-top:6px}
+}

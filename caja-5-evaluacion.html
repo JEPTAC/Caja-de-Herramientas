@@ -1,5 +1,3 @@
-<!doctype html>
-
 <!DOCTYPE html>
 
 <html lang="es">
@@ -8,13 +6,13 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Formulario público para evaluar espacios, actividades y mecanismos de participación ciudadana de la Alcaldía de San Pedro." name="description"/>
 <title>Herramienta de evaluación de la participación | Menú Participa</title>
-<link href="assets/css/estilos.css" rel="stylesheet"/>
+<link href="assets/img/escudo-san-pedro.jpg" rel="icon" type="image/jpeg"/><link href="assets/css/estilos.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido principal</a>
 <header class="site-header">
 <div class="nav-wrap">
-<a class="brand" href="index.html"><span aria-hidden="true" class="brand-mark">SP</span><span>San Pedro Participa</span></a>
+<a class="brand" href="index.html"><span aria-hidden="true" class="brand-mark logo-mark"><img alt="Escudo del Municipio de San Pedro, Valle del Cauca" src="assets/img/escudo-san-pedro.jpg"/></span><span>San Pedro Participa</span></a>
 <nav aria-label="Navegación principal" class="nav-links">
 <a href="index.html">Inicio</a>
 <a href="caja-1-diagnostico.html">Diagnóstico</a>
@@ -22,7 +20,7 @@
 <a href="caja-3-control-social.html">Control social</a>
 <a href="caja-4-dialogo-rendicion.html">Diálogo</a>
 <a aria-current="page" href="caja-5-evaluacion.html">Evaluación</a>
-</nav>
+<a class="nav-login" href="administracion.html">Iniciar sesión</a></nav>
 </div>
 <div class="breadcrumbs"><a href="index.html">Caja de herramientas</a> / Evaluación</div>
 <section class="hero">
@@ -32,8 +30,12 @@
 <p>Formulario para valorar la información, accesibilidad, metodología, oportunidad de intervención, calidad de las respuestas y satisfacción con los espacios participativos.</p>
 </div>
 <aside class="hero-panel">
-<strong>Su opinión cuenta</strong>
-<ul><li>Evaluación anónima</li><li>Formulario fácil de diligenciar</li><li>Código de comprobación</li></ul>
+<strong>Registro seguro</strong>
+<ul>
+<li>Evaluación anónima</li>
+<li>Registro seguro de la evaluación</li>
+<li>Código de comprobación</li>
+</ul>
 </aside>
 </section>
 </header>
@@ -45,7 +47,7 @@
 </article>
 <article class="panel">
 <h2>Tratamiento de la información</h2>
-<p>Su participación es anónima. No escriba nombres, números de documento, datos de contacto ni información sensible en las respuestas abiertas.</p>
+<p>No se solicitan nombres, documentos ni correos. Evite escribir datos personales o sensibles en los campos abiertos. Los resultados deben analizarse de forma agregada.</p>
 </article>
 </section>
 <div class="section-title">
@@ -53,7 +55,7 @@
 <h2>Evalúe el espacio de participación</h2>
 <p>Marque una opción por criterio. La escala va de 1 —muy deficiente— a 5 —excelente—.</p>
 </div>
-<form class="form-box firebase-form" id="form-evaluacion" novalidate="">
+<form class="form-box evaluation-form" id="form-evaluacion" novalidate="">
 <section aria-labelledby="datos-actividad">
 <h3 class="form-section-title" id="datos-actividad">1. Identificación de la actividad</h3>
 <div class="form-grid">
@@ -198,7 +200,7 @@
 </div>
 </div>
 </section>
-<div class="notice">Sus respuestas serán utilizadas para identificar oportunidades de mejora en los espacios de participación ciudadana.</div>
+<div class="notice">Su evaluación será recibida de manera confidencial y utilizada para mejorar los espacios de participación ciudadana.</div>
 <div class="form-actions">
 <button class="btn" id="enviar-evaluacion" type="submit">Enviar evaluación</button>
 <button class="btn secondary" id="limpiar-evaluacion" type="button">Limpiar</button>
@@ -210,19 +212,17 @@
 <p>Conserve este código como comprobante. No permite consultar respuestas personales.</p>
 </div>
 </form>
-
 </main>
 <footer class="site-footer">
 <div class="footer-inner">
 <div>
 <strong>Alcaldía Municipal de San Pedro, Valle del Cauca</strong>
 <p>Caja de herramientas del Menú Participa</p>
-<p class="foot-note">Sus respuestas contribuyen al mejoramiento de los espacios de participación ciudadana del municipio.</p>
+<p class="foot-note">Las respuestas se utilizan para identificar oportunidades de mejora en los espacios de participación ciudadana.</p>
 </div>
 <div>
 <strong>Enlaces</strong>
 <p><a href="https://www.sanpedro-valle.gov.co/" rel="noopener" target="_blank">Portal institucional</a></p>
-
 </div>
 </div>
 </footer>

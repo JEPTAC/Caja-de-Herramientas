@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="es">
 <head>
@@ -7,13 +7,13 @@
 <meta content="noindex,nofollow" name="robots"/>
 <meta content="Panel restringido para consultar las evaluaciones de participación ciudadana." name="description"/>
 <title>Administración de evaluaciones | San Pedro Participa</title>
-<link href="assets/css/estilos.css" rel="stylesheet"/>
+<link href="assets/img/escudo-san-pedro.jpg" rel="icon" type="image/jpeg"/><link href="assets/css/estilos.css" rel="stylesheet"/>
 </head>
 <body class="admin-page">
 <a class="skip" href="#contenido">Saltar al contenido principal</a>
 <header class="site-header compact-header">
 <div class="nav-wrap">
-<a class="brand" href="index.html"><span aria-hidden="true" class="brand-mark">SP</span><span>San Pedro Participa</span></a>
+<a class="brand" href="index.html"><span aria-hidden="true" class="brand-mark logo-mark"><img alt="Escudo del Municipio de San Pedro, Valle del Cauca" src="assets/img/escudo-san-pedro.jpg"/></span><span>San Pedro Participa</span></a>
 <nav aria-label="Navegación administrativa" class="nav-links">
 <a href="index.html">Volver al portal</a>
 <a href="caja-5-evaluacion.html">Formulario público</a>
@@ -23,18 +23,12 @@
 <div>
 <span class="eyebrow">Área restringida</span>
 <h1>Administración de evaluaciones</h1>
-<p>Consulta, análisis y exportación de las evaluaciones ciudadanas recibidas.</p>
+<p>Consulta, análisis y exportación de las evaluaciones recibidas.</p>
 </div>
 </section>
 </header>
 <main class="container admin-container" id="contenido">
-<section aria-labelledby="titulo-login" class="auth-card" id="login-view">
-<div aria-hidden="true" class="icon">🔐</div>
-<h2 id="titulo-login">Acceso institucional</h2>
-<p>Inicie sesión con la cuenta de Google autorizada para consultar las evaluaciones.</p>
-<div class="login-form" id="admin-login-form"><button aria-label="Ingresar con Google" class="btn google-btn" id="google-login" type="button"><svg aria-hidden="true" height="20" viewBox="0 0 24 24" width="20"><path d="M21.6 12.23c0-.71-.06-1.23-.2-1.77H12v3.42h5.52c-.11.85-.71 2.13-2.04 2.99l-.02.11 2.96 2.29.21.02c1.94-1.79 3.06-4.43 3.06-7.06Z" fill="#4285F4"></path><path d="M12 22c2.77 0 5.09-.91 6.79-2.49l-3.23-2.5c-.86.58-2.02.99-3.56.99-2.66 0-4.92-1.8-5.73-4.28l-.1.01-3.08 2.39-.04.1A10 10 0 0 0 12 22Z" fill="#34A853"></path><path d="M6.27 13.72A6.02 6.02 0 0 1 5.94 12c0-.6.11-1.18.32-1.72l-.01-.12-3.12-2.43-.1.05A10 10 0 0 0 2 12c0 1.52.34 2.96.95 4.22l3.32-2.5Z" fill="#FBBC05"></path><path d="M12 6c1.93 0 3.23.83 3.98 1.52l2.88-2.81C17.08 3.06 14.77 2 12 2a10 10 0 0 0-8.95 5.78l3.22 2.5C7.08 7.8 9.34 6 12 6Z" fill="#EA4335"></path></svg><span id="google-button-text">Ingresar con Google</span></button><div class="form-status" hidden="" id="login-status" role="alert"></div></div>
-
-</section>
+<section aria-labelledby="titulo-login" class="auth-card" id="login-view"><div aria-hidden="true" class="icon">🔐</div><h2 id="titulo-login">Iniciar sesión</h2><p>Seleccione la cuenta institucional autorizada para consultar las evaluaciones recibidas.</p><button aria-label="Iniciar sesión con Google" class="btn google-btn" id="google-login" type="button"><svg aria-hidden="true" height="20" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M21.35 12.23c0-.73-.07-1.43-.19-2.1H12v3.97h5.24a4.48 4.48 0 0 1-1.94 2.94v2.58h3.14c1.84-1.69 2.91-4.18 2.91-7.39Z" fill="#4285F4"></path><path d="M12 21.75c2.62 0 4.82-.87 6.43-2.36l-3.14-2.58c-.87.58-1.98.93-3.29.93-2.53 0-4.67-1.71-5.44-4.01H3.31v2.66A9.72 9.72 0 0 0 12 21.75Z" fill="#34A853"></path><path d="M6.56 13.73A5.84 5.84 0 0 1 6.25 12c0-.6.1-1.18.31-1.73V7.61H3.31A9.73 9.73 0 0 0 2.25 12c0 1.57.38 3.06 1.06 4.39l3.25-2.66Z" fill="#FBBC05"></path><path d="M12 6.26c1.43 0 2.71.49 3.72 1.45l2.78-2.78A9.33 9.33 0 0 0 12 2.25a9.72 9.72 0 0 0-8.69 5.36l3.25 2.66c.77-2.3 2.91-4.01 5.44-4.01Z" fill="#EA4335"></path></svg><span id="google-button-text">Iniciar sesión con Google</span></button><div class="form-status" hidden="" id="login-status" role="alert"></div></section>
 <section hidden="" id="dashboard-view">
 <div class="admin-toolbar">
 <div>
@@ -86,7 +80,7 @@
 <div class="table-heading">
 <div>
 <h3 id="titulo-tabla">Registros</h3>
-<p>Se muestran hasta 1.000 evaluaciones, ordenadas de la más reciente a la más antigua.</p>
+<p>Se cargan hasta 1.000 evaluaciones, ordenadas de la más reciente a la más antigua.</p>
 </div>
 </div>
 <p class="loading-message" id="cargando-datos">Consultando información…</p>
@@ -123,7 +117,7 @@
 </dialog>
 <footer class="site-footer">
 <div class="footer-inner">
-<div><strong>Área administrativa</strong><p class="foot-note">Acceso reservado para la consulta y exportación de las evaluaciones ciudadanas.</p></div>
+<div><strong>Área administrativa</strong><p class="foot-note">Consulta y exportación de las evaluaciones recibidas.</p></div>
 <div><p><a href="caja-5-evaluacion.html">Volver al formulario público</a></p></div>
 </div>
 </footer>
