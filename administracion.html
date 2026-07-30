@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Panel restringido para consultar las evaluaciones de participación ciudadana.">
+  <title>Administración de evaluaciones | San Pedro Participa</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body class="admin-page">
+  <a class="skip" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header compact-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">SP</span><span>San Pedro Participa</span></a>
+      <nav class="nav-links" aria-label="Navegación administrativa">
+        <a href="index.html">Volver al portal</a>
+        <a href="caja-5-evaluacion.html">Formulario público</a>
+      </nav>
+    </div>
+    <section class="hero admin-hero">
+      <div>
+        <span class="eyebrow">Área restringida</span>
+        <h1>Administración de evaluaciones</h1>
+        <p>Consulta y exportación de respuestas almacenadas en Firebase Firestore.</p>
+      </div>
+    </section>
+  </header>
+
+  <main id="contenido" class="container admin-container">
+    <section id="login-view" class="auth-card" aria-labelledby="titulo-login">
+      <div class="icon" aria-hidden="true">🔐</div>
+      <h2 id="titulo-login">Ingreso de superadministrador</h2>
+      <p>Use la cuenta existente en Firebase Authentication. Las reglas de Firestore permiten consultar la colección únicamente cuando el rol es <strong>super_admin</strong>.</p>
+      <form id="admin-login-form" class="login-form">
+        <div class="field">
+          <label for="admin-email">Correo electrónico</label>
+          <input id="admin-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="admin-password">Contraseña</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn" type="submit">Ingresar</button>
+        <div id="login-status" class="form-status" role="alert" hidden></div>
+      </form>
+      <div class="notice">Antes de publicar, habilite el proveedor <strong>Correo electrónico/Contraseña</strong> y agregue el dominio de GitHub Pages en los dominios autorizados de Firebase Authentication.</div>
+    </section>
+
+    <section id="dashboard-view" hidden>
+      <div class="admin-toolbar">
+        <div>
+          <span class="tag">Sesión autorizada</span>
+          <h2>Evaluaciones recibidas</h2>
+          <p>Cuenta: <strong id="admin-user"></strong></p>
+        </div>
+        <div class="toolbar-actions">
+          <button id="actualizar-datos" class="btn secondary" type="button">Actualizar</button>
+          <button id="exportar-csv" class="btn" type="button" disabled>Exportar CSV</button>
+          <button id="cerrar-sesion" class="btn danger" type="button">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <section class="kpi-row admin-kpis" aria-label="Indicadores generales">
+        <article class="kpi"><strong id="kpi-total">0</strong><span>Evaluaciones</span></article>
+        <article class="kpi"><strong id="kpi-promedio">—</strong><span>Satisfacción promedio / 5</span></article>
+        <article class="kpi"><strong id="kpi-recomendacion">—</strong><span>Recomendaría participar</span></article>
+        <article class="kpi"><strong id="kpi-ultima">—</strong><span>Último registro</span></article>
+      </section>
+
+      <section class="panel admin-filters" aria-labelledby="titulo-filtros">
+        <h3 id="titulo-filtros">Filtros</h3>
+        <div class="form-grid filters-grid">
+          <div class="field">
+            <label for="filtro-texto">Buscar</label>
+            <input id="filtro-texto" placeholder="Código, actividad o territorio">
+          </div>
+          <div class="field">
+            <label for="filtro-mecanismo">Mecanismo</label>
+            <select id="filtro-mecanismo">
+              <option value="">Todos</option>
+              <option>Rendición de cuentas</option>
+              <option>Audiencia pública</option>
+              <option>Mesa de participación</option>
+              <option>Encuesta o consulta</option>
+              <option>Taller o encuentro</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filtro-fecha">Fecha de actividad</label>
+            <input id="filtro-fecha" type="date">
+          </div>
+          <div class="field filter-button-field">
+            <button id="limpiar-filtros" class="btn secondary" type="button">Limpiar filtros</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-card" aria-labelledby="titulo-tabla">
+        <div class="table-heading">
+          <div>
+            <h3 id="titulo-tabla">Registros</h3>
+            <p>Se cargan hasta 1.000 evaluaciones, ordenadas de la más reciente a la más antigua.</p>
+          </div>
+        </div>
+        <p id="cargando-datos" class="loading-message">Consultando Firebase…</p>
+        <p id="sin-resultados" class="empty-message" hidden>No hay evaluaciones que coincidan con los filtros.</p>
+        <div class="table-scroll">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Actividad</th>
+                <th>Mecanismo</th>
+                <th>Fecha</th>
+                <th>Satisfacción</th>
+                <th>Recomienda</th>
+                <th>Registro</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-evaluaciones-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="detalle-dialog" class="detail-dialog">
+    <div class="dialog-header">
+      <div>
+        <span class="tag">Detalle de evaluación</span>
+        <h2>Respuesta ciudadana</h2>
+      </div>
+      <button id="cerrar-detalle" class="dialog-close" type="button" aria-label="Cerrar detalle">×</button>
+    </div>
+    <div id="detalle-contenido" class="detail-grid"></div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div><strong>Área administrativa</strong><p class="foot-note">El panel no modifica ni elimina respuestas; únicamente consulta y exporta los registros autorizados por Firestore.</p></div>
+      <div><p><a href="caja-5-evaluacion.html">Volver al formulario público</a></p></div>
+    </div>
+  </footer>
+  <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

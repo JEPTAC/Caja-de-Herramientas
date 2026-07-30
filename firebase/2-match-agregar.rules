@@ -1,0 +1,14 @@
+// PEGAR ANTES DEL BLOQUE GLOBAL:
+// match /{document=**} { allow read, write: if isSuperAdmin(); }
+// No reemplaza ni modifica ninguna colección existente.
+
+match /evaluacionesParticipacion/{registroId} {
+
+  // Un visitante, incluso sin iniciar sesión, únicamente puede crear
+  // una evaluación que cumpla toda la validación anterior.
+  allow create: if validEvaluationCreate();
+
+  // Ningún visitante puede leer, listar, modificar o eliminar respuestas.
+  // Solo el superadministrador reconocido por las funciones existentes.
+  allow read, update, delete: if isSuperAdmin();
+}

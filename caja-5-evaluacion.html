@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Formulario público para evaluar espacios, actividades y mecanismos de participación ciudadana de la Alcaldía de San Pedro.">
+  <title>Herramienta de evaluación de la participación | Menú Participa</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">SP</span><span>San Pedro Participa</span></a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="caja-1-diagnostico.html">Diagnóstico</a>
+        <a href="caja-2-propuestas.html">Propuestas</a>
+        <a href="caja-3-control-social.html">Control social</a>
+        <a href="caja-4-dialogo-rendicion.html">Diálogo</a>
+        <a href="caja-5-evaluacion.html" aria-current="page">Evaluación</a>
+      </nav>
+    </div>
+    <div class="breadcrumbs"><a href="index.html">Caja de herramientas</a> / Evaluación</div>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Caja 5 · Evaluación ciudadana</span>
+        <h1>Herramienta de evaluación de la participación</h1>
+        <p>Formulario para valorar la información, accesibilidad, metodología, oportunidad de intervención, calidad de las respuestas y satisfacción con los espacios participativos.</p>
+      </div>
+      <aside class="hero-panel">
+        <strong>Registro seguro</strong>
+        <ul>
+          <li>Evaluación anónima</li>
+          <li>Respuestas guardadas en Firebase</li>
+          <li>Código de comprobación</li>
+        </ul>
+      </aside>
+    </section>
+  </header>
+
+  <main id="contenido" class="container">
+    <section class="intro-grid">
+      <article class="panel">
+        <h2>Propósito</h2>
+        <p>Recoger información ciudadana que permita identificar fortalezas y oportunidades de mejora en las actividades del Menú Participa, la rendición de cuentas y otros mecanismos de diálogo.</p>
+      </article>
+      <article class="panel">
+        <h2>Tratamiento de la información</h2>
+        <p>No se solicitan nombres, documentos ni correos. Evite escribir datos personales o sensibles en los campos abiertos. Los resultados deben analizarse de forma agregada.</p>
+      </article>
+    </section>
+
+    <div class="section-title">
+      <span>Formulario en línea</span>
+      <h2>Evalúe el espacio de participación</h2>
+      <p>Marque una opción por criterio. La escala va de 1 —muy deficiente— a 5 —excelente—.</p>
+    </div>
+
+    <form id="form-evaluacion" class="form-box firebase-form" novalidate>
+      <section aria-labelledby="datos-actividad">
+        <h3 id="datos-actividad" class="form-section-title">1. Identificación de la actividad</h3>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="actividad">Nombre de la actividad o espacio participativo</label>
+            <input id="actividad" name="actividad" maxlength="160" minlength="2" required placeholder="Ejemplo: Audiencia pública de rendición de cuentas 2026">
+          </div>
+          <div class="field">
+            <label for="fechaActividad">Fecha de la actividad</label>
+            <input id="fechaActividad" name="fechaActividad" type="date" min="2026-01-01" max="2026-12-31" required>
+          </div>
+          <div class="field">
+            <label for="mecanismo">Tipo de mecanismo o espacio</label>
+            <select id="mecanismo" name="mecanismo" required>
+              <option value="">Seleccione</option>
+              <option>Rendición de cuentas</option>
+              <option>Audiencia pública</option>
+              <option>Mesa de participación</option>
+              <option>Encuesta o consulta</option>
+              <option>Taller o encuentro</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="territorio">Barrio, vereda, corregimiento o lugar</label>
+            <input id="territorio" name="territorio" maxlength="120" minlength="2" required>
+          </div>
+          <div class="field">
+            <label for="tipoParticipante">Participó como</label>
+            <select id="tipoParticipante" name="tipoParticipante" required>
+              <option value="">Seleccione</option>
+              <option>Ciudadanía general</option>
+              <option>Organización social o comunitaria</option>
+              <option>Veeduría o control social</option>
+              <option>Servidor público o contratista</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="modalidad">Modalidad</label>
+            <select id="modalidad" name="modalidad" required>
+              <option value="">Seleccione</option>
+              <option>Presencial</option>
+              <option>Virtual</option>
+              <option>Mixta</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="criterios-evaluacion">
+        <h3 id="criterios-evaluacion" class="form-section-title">2. Criterios de evaluación</h3>
+        <div class="rating-list">
+          <fieldset class="rating-fieldset">
+            <legend>La información previa fue clara y suficiente.</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Información previa">
+              <label><input type="radio" name="informacionPrevia" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="informacionPrevia" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="informacionPrevia" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="informacionPrevia" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="informacionPrevia" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-fieldset">
+            <legend>Fue fácil acceder y participar en la actividad.</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Facilidad de acceso">
+              <label><input type="radio" name="facilidadAcceso" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="facilidadAcceso" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="facilidadAcceso" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="facilidadAcceso" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="facilidadAcceso" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-fieldset">
+            <legend>La metodología y las reglas de participación fueron claras.</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Claridad de la metodología">
+              <label><input type="radio" name="claridadMetodologia" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="claridadMetodologia" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="claridadMetodologia" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="claridadMetodologia" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="claridadMetodologia" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-fieldset">
+            <legend>Tuvo una oportunidad real de expresar preguntas, opiniones o propuestas.</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Oportunidad de participar">
+              <label><input type="radio" name="oportunidadParticipar" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="oportunidadParticipar" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="oportunidadParticipar" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="oportunidadParticipar" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="oportunidadParticipar" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-fieldset">
+            <legend>Las respuestas institucionales fueron claras y pertinentes.</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Calidad de la respuesta">
+              <label><input type="radio" name="calidadRespuesta" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="calidadRespuesta" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="calidadRespuesta" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="calidadRespuesta" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="calidadRespuesta" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-fieldset">
+            <legend>¿Cuál es su satisfacción general con la actividad?</legend>
+            <div class="rating-scale" role="radiogroup" aria-label="Satisfacción general">
+              <label><input type="radio" name="satisfaccionGeneral" value="1" required><span>1<small>Muy deficiente</small></span></label>
+              <label><input type="radio" name="satisfaccionGeneral" value="2"><span>2<small>Deficiente</small></span></label>
+              <label><input type="radio" name="satisfaccionGeneral" value="3"><span>3<small>Aceptable</small></span></label>
+              <label><input type="radio" name="satisfaccionGeneral" value="4"><span>4<small>Buena</small></span></label>
+              <label><input type="radio" name="satisfaccionGeneral" value="5"><span>5<small>Excelente</small></span></label>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section aria-labelledby="comentarios-evaluacion">
+        <h3 id="comentarios-evaluacion" class="form-section-title">3. Resultado y recomendaciones</h3>
+        <div class="form-grid">
+          <fieldset class="field full compact-fieldset">
+            <legend>¿Recomendaría participar en un espacio similar?</legend>
+            <div class="inline-options">
+              <label><input type="radio" name="recomendaria" value="true" required> Sí</label>
+              <label><input type="radio" name="recomendaria" value="false"> No</label>
+            </div>
+          </fieldset>
+          <div class="field full">
+            <label for="aspectosPositivos">¿Qué funcionó bien?</label>
+            <textarea id="aspectosPositivos" name="aspectosPositivos" maxlength="1000" placeholder="Describa aspectos positivos de la convocatoria, metodología, atención o respuestas."></textarea>
+          </div>
+          <div class="field full">
+            <label for="aspectosMejorar">¿Qué debería mejorar?</label>
+            <textarea id="aspectosMejorar" name="aspectosMejorar" maxlength="1000" placeholder="Proponga mejoras concretas para próximos espacios."></textarea>
+          </div>
+          <div class="field full">
+            <label for="compromisoSeguimiento">¿Qué resultado o seguimiento espera después de esta actividad?</label>
+            <textarea id="compromisoSeguimiento" name="compromisoSeguimiento" maxlength="800"></textarea>
+          </div>
+          <div class="field full consent-field">
+            <label>
+              <input id="autorizacionTratamiento" name="autorizacionTratamiento" type="checkbox" required>
+              Autorizo el almacenamiento y análisis institucional de esta evaluación con fines de mejoramiento de la participación ciudadana. Confirmo que no incluí datos personales sensibles.
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <div class="notice">Al enviar, la respuesta se guarda en la colección <strong>evaluacionesParticipacion</strong>. La ciudadanía puede crear registros, pero no consultar respuestas de otras personas.</div>
+      <div class="form-actions">
+        <button id="enviar-evaluacion" class="btn" type="submit">Enviar evaluación</button>
+        <button id="limpiar-evaluacion" class="btn secondary" type="button">Limpiar</button>
+      </div>
+      <div id="estado-envio" class="form-status" role="status" tabindex="-1" hidden></div>
+      <div id="comprobante-evaluacion" class="receipt" hidden>
+        <span>Evaluación registrada</span>
+        <strong id="codigo-evaluacion"></strong>
+        <p>Conserve este código como comprobante. No permite consultar respuestas personales.</p>
+      </div>
+    </form>
+
+    <section class="callout">
+      <div>
+        <h2>Consulta administrativa</h2>
+        <p>El acceso a las respuestas está restringido exclusivamente a cuentas reconocidas como superadministrador.</p>
+      </div>
+      <a class="btn gold" href="administracion.html">Ingresar como administrador</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Alcaldía Municipal de San Pedro, Valle del Cauca</strong>
+        <p>Caja de herramientas del Menú Participa</p>
+        <p class="foot-note">La evaluación se almacena en Firebase. Los demás formatos del micrositio continúan funcionando localmente en el navegador.</p>
+      </div>
+      <div>
+        <strong>Enlaces</strong>
+        <p><a href="https://www.sanpedro-valle.gov.co/" target="_blank" rel="noopener">Portal institucional</a></p>
+        <p><a href="administracion.html">Acceso administrativo</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/evaluacion.js"></script>
+</body>
+</html>

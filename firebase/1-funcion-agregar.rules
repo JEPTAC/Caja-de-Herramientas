@@ -1,0 +1,132 @@
+// PEGAR JUNTO A LAS DEMÁS FUNCIONES DE VALIDACIÓN,
+// antes de la sección "CONTENIDO DEL PORTAL".
+// No reemplaza ni modifica ninguna función existente.
+
+function validEvaluationCreate() {
+  let d = request.resource.data;
+
+  return d.keys().hasAll([
+      'codigo',
+      'tipoFormulario',
+      'vigencia',
+      'actividad',
+      'fechaActividad',
+      'mecanismo',
+      'territorio',
+      'tipoParticipante',
+      'modalidad',
+      'informacionPrevia',
+      'facilidadAcceso',
+      'claridadMetodologia',
+      'oportunidadParticipar',
+      'calidadRespuesta',
+      'satisfaccionGeneral',
+      'recomendaria',
+      'aspectosPositivos',
+      'aspectosMejorar',
+      'compromisoSeguimiento',
+      'autorizacionTratamiento',
+      'estado',
+      'origen',
+      'createdAt',
+      'updatedAt'
+    ])
+    && d.keys().hasOnly([
+      'codigo',
+      'tipoFormulario',
+      'vigencia',
+      'actividad',
+      'fechaActividad',
+      'mecanismo',
+      'territorio',
+      'tipoParticipante',
+      'modalidad',
+      'informacionPrevia',
+      'facilidadAcceso',
+      'claridadMetodologia',
+      'oportunidadParticipar',
+      'calidadRespuesta',
+      'satisfaccionGeneral',
+      'recomendaria',
+      'aspectosPositivos',
+      'aspectosMejorar',
+      'compromisoSeguimiento',
+      'autorizacionTratamiento',
+      'estado',
+      'origen',
+      'createdAt',
+      'updatedAt'
+    ])
+
+    // Identificación y vigencia del formulario.
+    && d.codigo is string
+    && d.codigo.matches('^EV-2026-[A-Z0-9]{8}$')
+    && d.tipoFormulario == 'evaluacion_participacion_2026'
+    && d.vigencia == 2026
+
+    // Actividad evaluada.
+    && d.actividad is string
+    && d.actividad.size() >= 2
+    && d.actividad.size() <= 160
+    && d.fechaActividad is string
+    && d.fechaActividad.matches('^2026-[0-9]{2}-[0-9]{2}$')
+    && d.mecanismo in [
+      'Rendición de cuentas',
+      'Audiencia pública',
+      'Mesa de participación',
+      'Encuesta o consulta',
+      'Taller o encuentro',
+      'Otro'
+    ]
+    && d.territorio is string
+    && d.territorio.size() >= 2
+    && d.territorio.size() <= 120
+    && d.tipoParticipante in [
+      'Ciudadanía general',
+      'Organización social o comunitaria',
+      'Veeduría o control social',
+      'Servidor público o contratista',
+      'Otro'
+    ]
+    && d.modalidad in [
+      'Presencial',
+      'Virtual',
+      'Mixta'
+    ]
+
+    // Escala de evaluación: enteros entre 1 y 5.
+    && d.informacionPrevia is int
+    && d.informacionPrevia >= 1
+    && d.informacionPrevia <= 5
+    && d.facilidadAcceso is int
+    && d.facilidadAcceso >= 1
+    && d.facilidadAcceso <= 5
+    && d.claridadMetodologia is int
+    && d.claridadMetodologia >= 1
+    && d.claridadMetodologia <= 5
+    && d.oportunidadParticipar is int
+    && d.oportunidadParticipar >= 1
+    && d.oportunidadParticipar <= 5
+    && d.calidadRespuesta is int
+    && d.calidadRespuesta >= 1
+    && d.calidadRespuesta <= 5
+    && d.satisfaccionGeneral is int
+    && d.satisfaccionGeneral >= 1
+    && d.satisfaccionGeneral <= 5
+    && d.recomendaria is bool
+
+    // Comentarios abiertos, sin datos personales obligatorios.
+    && d.aspectosPositivos is string
+    && d.aspectosPositivos.size() <= 1000
+    && d.aspectosMejorar is string
+    && d.aspectosMejorar.size() <= 1000
+    && d.compromisoSeguimiento is string
+    && d.compromisoSeguimiento.size() <= 800
+    && d.autorizacionTratamiento == true
+
+    // Campos administrativos iniciales inalterables para creación pública.
+    && d.estado == 'recibida'
+    && d.origen == 'github_pages'
+    && d.createdAt == request.time
+    && d.updatedAt == request.time;
+}
